@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.hessel.controle_financeiro.entities.GrupoEntity;
-import br.com.hessel.controle_financeiro.services.CrudGrupoService;
+import br.com.hessel.controle_financeiro.model.entities.GrupoEntity;
+import br.com.hessel.controle_financeiro.model.services.CrudGrupoService;
 
 @RestController
 @RequestMapping(value = "/api/grupos")

@@ -1,4 +1,4 @@
-package br.com.hessel.controle_financeiro.utils.enuns;
+package br.com.hessel.controle_financeiro.model.enuns;
 
 import java.util.stream.Stream;
 

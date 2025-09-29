@@ -1,11 +1,11 @@
-package br.com.hessel.controle_financeiro.services;
+package br.com.hessel.controle_financeiro.model.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.hessel.controle_financeiro.entities.GrupoEntity;
+import br.com.hessel.controle_financeiro.model.entities.GrupoEntity;
 import br.com.hessel.controle_financeiro.repositories.GrupoRepository;
 import jakarta.transaction.Transactional;
 

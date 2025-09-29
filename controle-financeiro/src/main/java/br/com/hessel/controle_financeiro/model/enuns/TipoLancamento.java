@@ -1,4 +1,4 @@
-package br.com.hessel.controle_financeiro.utils.enuns;
+package br.com.hessel.controle_financeiro.model.enuns;
 
 public enum TipoLancamento {
 	DESPESA(1),

@@ -1,6 +1,6 @@
-package br.com.hessel.controle_financeiro.entities;
+package br.com.hessel.controle_financeiro.model.entities;
 
-import br.com.hessel.controle_financeiro.utils.enuns.TipoLancamento;
+import br.com.hessel.controle_financeiro.model.enuns.TipoLancamento;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
