@@ -1,29 +1,28 @@
-package com.example.controle_financeiro.services;
+package br.com.hessel.controle_financeiro.model.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.controle_financeiro.entities.GrupoEntity;
-import com.example.controle_financeiro.repositories.GrupoRepository;
-
+import br.com.hessel.controle_financeiro.model.entities.GrupoEntity;
+import br.com.hessel.controle_financeiro.repositories.GrupoRepository;
 import jakarta.transaction.Transactional;
 
 @Service
 public class CrudGrupoService {
-	
+
 	@Autowired
 	private GrupoRepository grupoRepository;
 
-	
+
 	public List<GrupoEntity> listaGrupos(){
-		
+
 		return grupoRepository.findAll();
 	}
 	public GrupoEntity listaGrupoPorId(Integer id){
 		return grupoRepository.findById(id).orElse(null);
-		
+
 	}
 	@Transactional
 	public void salvaGrupo(GrupoEntity grupo) {

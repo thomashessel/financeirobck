@@ -1,7 +1,6 @@
-package com.example.controle_financeiro.entities;
+package br.com.hessel.controle_financeiro.model.entities;
 
-import com.example.controle_financeiro.utils.enuns.TipoLancamento;
-
+import br.com.hessel.controle_financeiro.model.enuns.TipoLancamento;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,14 +12,14 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "GRUPO")
 public class GrupoEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(name = "nome",nullable = false,length = 30)
 	private String nome;
-	
+
 	@Column(name = "tp_lancamento",nullable = false)
 	private TipoLancamento tpoLancamento;
 
@@ -28,7 +27,7 @@ public class GrupoEntity {
 		this.nome = nome;
 		this.tpoLancamento = tpoLancamento;
 	}
-	
+
 	public GrupoEntity() {}
 
 	public Integer getId() {
@@ -54,7 +53,7 @@ public class GrupoEntity {
 	public void setTpoLancamento(TipoLancamento tpoLancamento) {
 		this.tpoLancamento = tpoLancamento;
 	}
-	
-	
-	
+
+
+
 }

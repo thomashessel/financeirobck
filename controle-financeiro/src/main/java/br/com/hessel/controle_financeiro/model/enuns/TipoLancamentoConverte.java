@@ -1,4 +1,4 @@
-package com.example.controle_financeiro.utils.enuns;
+package br.com.hessel.controle_financeiro.model.enuns;
 
 import java.util.stream.Stream;
 
@@ -18,5 +18,5 @@ public class TipoLancamentoConverte implements AttributeConverter<TipoLancamento
 		          .filter(c -> c.getIndice().equals(dbData))
 		          .findFirst()
 		          .orElseThrow(IllegalArgumentException::new):null;
-	}	
+	}
 }
