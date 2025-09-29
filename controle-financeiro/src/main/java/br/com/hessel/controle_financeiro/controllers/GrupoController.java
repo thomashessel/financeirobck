@@ -1,4 +1,4 @@
-package com.example.controle_financeiro.controllers;
+package br.com.hessel.controle_financeiro.controllers;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.controle_financeiro.entities.GrupoEntity;
-import com.example.controle_financeiro.services.CrudGrupoService;
+import br.com.hessel.controle_financeiro.entities.GrupoEntity;
+import br.com.hessel.controle_financeiro.services.CrudGrupoService;
 
 @RestController
 @RequestMapping(value = "/api/grupos")
