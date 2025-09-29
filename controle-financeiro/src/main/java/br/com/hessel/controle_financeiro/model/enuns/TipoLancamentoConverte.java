@@ -18,5 +18,5 @@ public class TipoLancamentoConverte implements AttributeConverter<TipoLancamento
 		          .filter(c -> c.getIndice().equals(dbData))
 		          .findFirst()
 		          .orElseThrow(IllegalArgumentException::new):null;
-	}	
+	}
 }

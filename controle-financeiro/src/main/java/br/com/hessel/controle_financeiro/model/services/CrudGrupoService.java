@@ -11,18 +11,18 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class CrudGrupoService {
-	
+
 	@Autowired
 	private GrupoRepository grupoRepository;
 
-	
+
 	public List<GrupoEntity> listaGrupos(){
-		
+
 		return grupoRepository.findAll();
 	}
 	public GrupoEntity listaGrupoPorId(Integer id){
 		return grupoRepository.findById(id).orElse(null);
-		
+
 	}
 	@Transactional
 	public void salvaGrupo(GrupoEntity grupo) {

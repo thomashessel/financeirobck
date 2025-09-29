@@ -20,36 +20,36 @@ import br.com.hessel.controle_financeiro.model.services.CrudGrupoService;
 @RestController
 @RequestMapping(value = "/api/grupos")
 public class GrupoController {
-	
+
 	@Autowired
 	private CrudGrupoService grupoService;
-	
+
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
 	public List<GrupoEntity> listaGrupos(){
 		return grupoService.listaGrupos();
 	}
-	
+
 	@GetMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public GrupoEntity grupoPorId(@PathVariable("id") Integer id ){		
+	public GrupoEntity grupoPorId(@PathVariable("id") Integer id ){
 		return grupoService.listaGrupoPorId(id);
 	}
-	
+
 	@PostMapping(value = "/novo")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void salvarGrupo(@RequestBody GrupoEntity grupo ){
 		 grupoService.salvaGrupo(grupo);
 	}
-	
-	@PutMapping(value = "/{id}/edita")	
+
+	@PutMapping(value = "/{id}/edita")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void editarGrupo(@RequestBody GrupoEntity grupo,@PathVariable("id") Integer id ){
 		 grupoService.alteraGrupo(grupo, id);
 	}
 	@DeleteMapping("/{id}/exclui")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void excluirGrupo(@PathVariable("id") Integer id ){		
+	public void excluirGrupo(@PathVariable("id") Integer id ){
 		grupoService.excluiGrupo(id);
 	}
 }

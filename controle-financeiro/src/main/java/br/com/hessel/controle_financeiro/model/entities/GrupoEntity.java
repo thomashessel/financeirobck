@@ -12,14 +12,14 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "GRUPO")
 public class GrupoEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(name = "nome",nullable = false,length = 30)
 	private String nome;
-	
+
 	@Column(name = "tp_lancamento",nullable = false)
 	private TipoLancamento tpoLancamento;
 
@@ -27,7 +27,7 @@ public class GrupoEntity {
 		this.nome = nome;
 		this.tpoLancamento = tpoLancamento;
 	}
-	
+
 	public GrupoEntity() {}
 
 	public Integer getId() {
@@ -53,7 +53,7 @@ public class GrupoEntity {
 	public void setTpoLancamento(TipoLancamento tpoLancamento) {
 		this.tpoLancamento = tpoLancamento;
 	}
-	
-	
-	
+
+
+
 }
