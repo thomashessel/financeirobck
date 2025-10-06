@@ -1,4 +1,4 @@
-package br.com.hessel.controle_financeiro.model.exceptions;
+package br.com.hessel.controle_financeiro.core.estrururaexception;
 
 public class PropriedadesErro {
 
