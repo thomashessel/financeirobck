@@ -1,11 +1,15 @@
 package br.com.hessel.controle_financeiro.model.entities;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import br.com.hessel.controle_financeiro.model.enuns.StatusMeta;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,6 +29,9 @@ public class MetaEntity {
 	private StatusMeta status;
 	@Column(name = "margem_percentual",nullable = true)
 	private Double margemPercentual;
+	
+	@OneToMany(mappedBy = "meta")
+	private List<HistoricoMetaEntity> historicos;
 	
 	
 	public Integer getId() {
@@ -58,6 +65,9 @@ public class MetaEntity {
 		return cicloAtual;
 	}
 	
+	public List<HistoricoMetaEntity> getHistoricos() {
+		return historicos;
+	}
 	public MetaEntity() {	}	
 	public MetaEntity(Double vlMeta) {
 		this.vlMeta = vlMeta;
@@ -72,6 +82,14 @@ public class MetaEntity {
 	}
 	public void proximoCiclo() {
 		cicloAtual+=1;
+	}
+	
+	public void adicionaHistorico(HistoricoMetaEntity historico) {
+		this.historicos.add(historico);
+	}
+	public void adicionaHistorico(Integer metaId, Double valor, LocalDate dataMovimento, Integer ciclo,
+			StatusMeta statusFechamento ) {
+		this.historicos.add(new HistoricoMetaEntity(metaId, valor, dataMovimento, ciclo, statusFechamento));
 	}
 	
 }
