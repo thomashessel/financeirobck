@@ -2,6 +2,8 @@ package br.com.hessel.controle_financeiro.model.entities;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import br.com.hessel.controle_financeiro.model.enuns.TipoRecorrencia;
 import br.com.hessel.controle_financeiro.model.enuns.TipoValor;
 import jakarta.persistence.Column;
@@ -20,6 +22,7 @@ public class ConfiguracoesEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@CreationTimestamp
 	@Column(name = "dt_cadastro",nullable = false)
 	private LocalDate dataCadastro;
 	@Column(name = "tp_recorrencia",nullable = false)
@@ -34,7 +37,7 @@ public class ConfiguracoesEntity {
 	private Integer qdteOcorrencia;
 	@Column(name = "dt_inicial",nullable = true)
 	private LocalDate dataInicial;
-	@Column(name = "dt_inicial",nullable = true)
+	@Column(name = "dt_final",nullable = true)
 	private LocalDate dataFinal;
 	@Column(name = "tp_valor",nullable = false)
 	private TipoValor tipoValor;
@@ -58,11 +61,7 @@ public class ConfiguracoesEntity {
 	public LocalDate getDataCadastro() {
 		return dataCadastro;
 	}
-
-	public void setDataCadastro(LocalDate dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
-
+	
 	public TipoRecorrencia getTipoRecorrencia() {
 		return tipoRecorrencia;
 	}
@@ -142,6 +141,12 @@ public class ConfiguracoesEntity {
 	public void setNotificacao(Boolean notificacao) {
 		this.notificacao = notificacao;
 	}
+	
+	
+	public MetaEntity getMeta() {
+		return meta;
+	}
+
 	public ConfiguracoesEntity() {}
 	public ConfiguracoesEntity(LocalDate dataCadastro, TipoRecorrencia tipoRecorrencia, String diaSemana,
 			String diaQuinzena, Integer diaMes, Integer qdteOcorrencia, LocalDate dataInicial, LocalDate dataFinal,
