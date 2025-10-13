@@ -1,6 +1,7 @@
 package br.com.hessel.controle_financeiro.model.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -12,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -47,6 +49,16 @@ public class LancamentoEntity {
 	@OneToOne
 	@JoinColumn(name = "configuracao_id",nullable = true)
 	private ConfiguracoesEntity configuracoes;
+	
+	@OneToMany(mappedBy = "lancamento")
+	private List<MovimentoEntity> movimentos;
+	
+	public List<MovimentoEntity> getMovimentos() {
+		return movimentos;
+	}
+	public void setMovimentos(List<MovimentoEntity> movimentos) {
+		this.movimentos = movimentos;
+	}
 	public Integer getId() {
 		return id;
 	}
