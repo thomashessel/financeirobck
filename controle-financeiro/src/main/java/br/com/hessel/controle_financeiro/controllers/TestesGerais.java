@@ -34,7 +34,8 @@ public class TestesGerais {
 	private MovimentoRepository repoMovi;
 	@Autowired
 	private LancamentoRepository repoLance;
-	
+	@Autowired
+	private MetaRepository repoMeta;
 	
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
@@ -82,5 +83,10 @@ public class TestesGerais {
 	@GetMapping("/lancamento/{id}/movimento")
 	public List<MovimentoEntity> listarMovimentoDeLancamento(@PathVariable(name = "id") Integer id) {
 		return repoLance.findById(id).get().getMovimentos();
+	}
+	
+	@GetMapping("/meta")
+	public List<MetaEntity> listarMeta() {
+		return repoMeta.findAll();
 	}
 }
