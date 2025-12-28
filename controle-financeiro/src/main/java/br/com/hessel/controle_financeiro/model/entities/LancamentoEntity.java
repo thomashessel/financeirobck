@@ -149,7 +149,12 @@ public class LancamentoEntity {
 		this.configuracoes = configuracoes;
 	}
 	
-	
+	public void adicionaMovimento(MovimentoEntity movimento) {
+		this.movimentos.add(movimento);
+	}
+	public void removeMovimento (MovimentoEntity movimento) {
+		this.movimentos.remove(movimento);
+	}
 	
 	
 }
