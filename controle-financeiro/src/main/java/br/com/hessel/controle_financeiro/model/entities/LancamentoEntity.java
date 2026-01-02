@@ -41,7 +41,7 @@ public class LancamentoEntity {
 	private LocalDate dataInativo;
 	@Column(name = "dt_cancelamento",nullable = true)
 	private LocalDate dataCancelamento;
-	@Column(name = "ativo",nullable = false)
+	@Column(name = "ativo",nullable = true)
 	private Boolean ativo;
 	@Column(name = "observacao",nullable = true,length = 120)
 	private String observacao;

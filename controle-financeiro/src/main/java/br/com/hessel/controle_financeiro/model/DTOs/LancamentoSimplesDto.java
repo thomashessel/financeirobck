@@ -19,6 +19,7 @@ public class LancamentoSimplesDto {
 	private String observacao;
 	private Boolean ativo;
 	private String grupo;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -68,6 +69,7 @@ public class LancamentoSimplesDto {
 		this.grupo = grupo;
 	}
 	
+	
 	public LancamentoSimplesDto() {}
 	public LancamentoSimplesDto(LancamentoEntity lancamento) {
 		this.id = lancamento.getId();
@@ -77,8 +79,10 @@ public class LancamentoSimplesDto {
 		this.dataVencimento = lancamento.getDataVencimento();
 		this.observacao = lancamento.getObservacao();
 		this.ativo = lancamento.getAtivo();
-		this.grupo = lancamento.getGrupo().getNome();
-		
+		if(lancamento.getGrupo()!= null) {
+			this.grupo = lancamento.getGrupo().getNome();	
+		}
+				
 	}
 	public LancamentoSimplesDto(Integer id, String nome, TipoLancamento tipoLancamento, Double valorTotal,
 			LocalDate dataVencimento, String observacao, Boolean ativo, String grupo) {
