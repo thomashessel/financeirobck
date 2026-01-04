@@ -2,12 +2,14 @@ package br.com.hessel.controle_financeiro.model.entities;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import br.com.hessel.controle_financeiro.model.enuns.TipoLancamento;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,19 +41,23 @@ public class LancamentoEntity {
 	private LocalDate dataInativo;
 	@Column(name = "dt_cancelamento",nullable = true)
 	private LocalDate dataCancelamento;
-	@Column(name = "ativo",nullable = false)
+	@Column(name = "ativo",nullable = true)
 	private Boolean ativo;
 	@Column(name = "observacao",nullable = true,length = 120)
 	private String observacao;
+	
 	@ManyToOne()
 	@JoinColumn(name = "grupo_id",nullable = true)
 	private GrupoEntity grupo;
+	
 	@OneToOne
 	@JoinColumn(name = "configuracao_id",nullable = true)
 	private ConfiguracoesEntity configuracoes;
 	
-	@OneToMany(mappedBy = "lancamento")
+	@OneToMany(mappedBy = "lancamento", fetch = FetchType.LAZY)
 	private List<MovimentoEntity> movimentos;
+	
+	
 	
 	public List<MovimentoEntity> getMovimentos() {
 		return movimentos;
@@ -131,6 +137,24 @@ public class LancamentoEntity {
 	public void setConfiguracoes(ConfiguracoesEntity configuracoes) {
 		this.configuracoes = configuracoes;
 	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LancamentoEntity other = (LancamentoEntity) obj;
+		return Objects.equals(id, other.id);
+	}
+	
+	
 	public LancamentoEntity() {}
 	public LancamentoEntity(String nome, TipoLancamento tipoLancamento, Double valorTotal, LocalDate dataVencimento,
 			LocalDate dataCadastro, LocalDate dataInativo, LocalDate dataCancelamento, Boolean ativo, String observacao,
@@ -149,7 +173,25 @@ public class LancamentoEntity {
 		this.configuracoes = configuracoes;
 	}
 	
+	public void adicionaMovimento(MovimentoEntity movimento) {
+		this.movimentos.add(movimento);
+	}
+	public void removeMovimento (MovimentoEntity movimento) {
+		this.movimentos.remove(movimento);
+	}
 	
-	
-	
+	public void cancelar() {
+		setDataCancelamento(LocalDate.now());
+	}
+	public void ativar() {
+		setAtivo(true);
+		setDataInativo(null);
+	}
+	public void inativar() {
+		setAtivo(false);
+		setDataInativo(LocalDate.now());
+	}
+	public boolean estaCancelado() {
+		return getDataCancelamento()!=null ? true : false;
+	}
 }
