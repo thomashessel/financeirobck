@@ -21,12 +21,13 @@ public class LancamentoService {
 	@Autowired
 	private CrudGrupoService grupoService;
 
-	public List<LancamentoEntity> listarLancamento() {
+	public List<LancamentoEntity> listaLancamentos() {
 		return repoLancamento.findAll();
 	}
 
-	public List<LancamentoEntity> listarLancamentoPorTipo(TipoLancamento tipo) {
-		return repoLancamento.findAll().stream().filter(lancamento -> lancamento.getTipoLancamento().equals(tipo))
+	public List<LancamentoEntity> listaLancamentosPorTipo(TipoLancamento tipo) {
+		return repoLancamento.findAll().stream()
+				.filter(lancamento -> lancamento.getTipoLancamento().equals(tipo))
 				.toList();
 	}
 
@@ -51,10 +52,32 @@ public class LancamentoService {
 		lancamentoResult.setTipoLancamento(lancamento.getTipoLancamento());
 		lancamentoResult.setObservacao(lancamento.getObservacao());
 		lancamentoResult.setGrupo(lancamento.getGrupo());
-		repoLancamento.save(lancamentoResult);
+//		repoLancamento.save(lancamentoResult);
+	}
+	@Transactional
+	public void cancelaLancamento(Integer idLancamento) {
+		LancamentoEntity lancamentoResult = this.buscaLancamentoPorId(idLancamento);
+		if(lancamentoResult.estaCancelado()) {
+			throw new FalhaRequisicaoException("O lancamento selecionado já se encontra cancelado");
+		}
+		lancamentoResult.cancelar();
+	}
+	@Transactional
+	public void alteraStatusAtivacao(Integer idLancamento,boolean status) {
+		LancamentoEntity lancamentoResult = this.buscaLancamentoPorId(idLancamento);
+		if(lancamentoResult.estaCancelado()) {
+			throw new FalhaRequisicaoException("Não é possível seguir com a operação pois o lancamento já se encontra cancelado");
+		}
+		if(status) {
+			lancamentoResult.ativar();
+		}
+		else {
+			lancamentoResult.inativar();
+		}
 	}
 	
-	private void validaSimplificado(LancamentoEntity lancamento) {
+	
+ 	private void validaSimplificado(LancamentoEntity lancamento) {
 		if (lancamento.getConfiguracoes() != null) {
 			throw new FalhaRequisicaoException("Não é possivel criar um lançamento rápido com configuração");
 		}
@@ -71,4 +94,7 @@ public class LancamentoService {
 			}
 		}		
 	}
+ 	
+ 
+ 	
 }

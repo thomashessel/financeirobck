@@ -180,5 +180,18 @@ public class LancamentoEntity {
 		this.movimentos.remove(movimento);
 	}
 	
-	
+	public void cancelar() {
+		setDataCancelamento(LocalDate.now());
+	}
+	public void ativar() {
+		setAtivo(true);
+		setDataInativo(null);
+	}
+	public void inativar() {
+		setAtivo(false);
+		setDataInativo(LocalDate.now());
+	}
+	public boolean estaCancelado() {
+		return getDataCancelamento()!=null ? true : false;
+	}
 }
