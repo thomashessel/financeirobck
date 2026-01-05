@@ -1,5 +1,6 @@
 package br.com.hessel.controle_financeiro.model.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.hessel.controle_financeiro.model.entities.GrupoEntity;
 import br.com.hessel.controle_financeiro.model.entities.LancamentoEntity;
+import br.com.hessel.controle_financeiro.model.entities.MovimentoEntity;
 import br.com.hessel.controle_financeiro.model.enuns.TipoLancamento;
 import br.com.hessel.controle_financeiro.model.exceptions.FalhaRequisicaoException;
 import br.com.hessel.controle_financeiro.model.exceptions.RecursoNaoEncontradoException;
@@ -38,8 +40,24 @@ public class LancamentoService {
 
 	@Transactional
 	public void salvaLancamentoSimplificado(LancamentoEntity lancamento) {
-		this.validaSimplificado(lancamento);		
-		lancamento.setAtivo(true);
+		MovimentoEntity movimento = new MovimentoEntity();
+		this.validaSimplificado(lancamento);
+		if(lancamento.getDataVencimento()== null) {
+			lancamento.setDataVencimento(LocalDate.now());
+		}
+		movimento.setDataMovimento(lancamento.getDataVencimento().atStartOfDay());
+		movimento.setValor(lancamento.getValorTotal());
+		if(lancamento.getDataVencimento().compareTo(LocalDate.now())>=0) {		
+			movimento.setStatusBaixa(false);
+			lancamento.setAtivo(true);
+		}
+		else {
+			movimento.setStatusBaixa(true);
+			lancamento.setAtivo(false);
+			lancamento.setDataInativo(LocalDate.now());
+		}
+		movimento.setLancamento(lancamento);
+		lancamento.adicionaMovimento(movimento);
 		repoLancamento.save(lancamento);
 	}
 	@Transactional

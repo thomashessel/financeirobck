@@ -1,5 +1,6 @@
 package br.com.hessel.controle_financeiro.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,5 +89,23 @@ public class TestesGerais {
 	@GetMapping("/meta")
 	public List<MetaEntity> listarMeta() {
 		return repoMeta.findAll();
+	}
+	@PostMapping("/Datas")
+	public String maiorMenorData(@RequestBody LocalDate data) {
+		String resultado="";
+		if(data.isAfter(LocalDate.now())|| data.isEqual(LocalDate.now())) {
+			resultado="1ª IF maior ou igual";
+		}
+		else {
+			resultado="1ª IF menor";
+		}
+		
+		if(data.compareTo(LocalDate.now())>=0) {
+			resultado+= " 2ª IF maior ou igual";
+		}
+		else {
+			resultado+= " 2ª IF menor";
+		}
+		return resultado;
 	}
 }

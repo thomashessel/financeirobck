@@ -1,12 +1,14 @@
 package br.com.hessel.controle_financeiro.model.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import br.com.hessel.controle_financeiro.model.enuns.TipoLancamento;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -48,14 +50,14 @@ public class LancamentoEntity {
 	
 	@ManyToOne()
 	@JoinColumn(name = "grupo_id",nullable = true)
-	private GrupoEntity grupo;
+	private GrupoEntity grupo = null;
 	
 	@OneToOne
 	@JoinColumn(name = "configuracao_id",nullable = true)
-	private ConfiguracoesEntity configuracoes;
+	private ConfiguracoesEntity configuracoes= null;
 	
-	@OneToMany(mappedBy = "lancamento", fetch = FetchType.LAZY)
-	private List<MovimentoEntity> movimentos;
+	@OneToMany(mappedBy = "lancamento", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private List<MovimentoEntity> movimentos = new ArrayList<>();
 	
 	
 	
